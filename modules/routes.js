@@ -1,6 +1,9 @@
-import db from "../Database/index.js";
+import db from "../database/index.js";
 
-const ModuleRoutes = (app) => {
+function ModuleRoutes(app) {
+  app.get("/api/modules", (req, res) => {
+    res.send(db.modules);
+  });
   app.get("/api/courses/:cid/modules", (req, res) => {
     const { cid } = req.params;
     const modules = db.modules.filter((m) => m.course === cid);
@@ -33,6 +36,6 @@ const ModuleRoutes = (app) => {
     db.modules = db.modules.filter((m) => m._id !== mid);
     res.sendStatus(200);
   });
-};
+}
 
 export default ModuleRoutes;
